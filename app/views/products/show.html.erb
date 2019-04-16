@@ -1,34 +1,61 @@
-<p id="notice"><%= notice %></p>
+<% content_for :body_class, 'bg-dark' %>
 
-<p>
-  <strong>Brand:</strong>
-  <%= @product.brand %>
-</p>
+<section class="section product-show">
+  <div class="columns">
+    <div class="column is-8">
+      <h1 class="title is-2"><%= @product.title %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+      <ul class="pv1">
+        <% if @product.brand? %>
+        <li class="inline-block pr3"><%= @product.brand %></li>
+        <% end %>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @product.condition %>
-</p>
+        <% if @product.condition? %>
+        <li class="inline-block pr3"><%= @product.condition %></li>
+        <% end %>
+      </ul>
 
-<p>
-  <strong>Finish:</strong>
-  <%= @product.finish %>
-</p>
+      <div class="feature-image">
+        <%= image_tag(@product.image_url(:default)) %>
+      </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
+      <div class="content pa4 mt3 bg-dark border-radius-3">
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
+      <h3 class="subtitle is-4">Description</h3>
+      <%= @product.description %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+
+      <h3 class="subtitle is-4 pt5">Product Specs</h3>
+
+      <table class="table is-narrow">
+        <% if @product.condition %>
+        <tr>
+          <td class="has-text-weight-bold">Condition:</td>
+          <td><%= @product.condition %></td>
+        </tr>
+        <% end %>
+
+        <% if @product.finish %>
+          <tr>
+            <td class="has-text-weight-bold">Finish:</td>
+            <td><%= @product.finish %></td>
+          </tr>
+        <% end %>
+
+        <% if @product.brand %>
+          <tr>
+            <td class="has-text-weight-bold">Brand:</td>
+            <td><%= @product.brand %></td>
+          </tr>
+        <% end %>
+
+      </table>
+    </div>
+    </div>
+
+  </div>
+
+  <% if product_author(@product) %>
+    <%= link_to 'Edit', edit_product_path(@product), class: 'button' %>
+  <% end %>
+</section>
