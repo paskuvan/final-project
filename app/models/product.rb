@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  before_destroy :not_referenced_by_any_line_item
   mount_uploader :image, ImageUploader
   serialize :image, JSON
   belongs_to :user, optional: true
@@ -11,4 +12,13 @@ class Product < ApplicationRecord
   BRAND = %w{ Barr Canyon Nutthins CreamRice Chex Barilla Simpli Erewhon Dole}
   FINISH = %w{ Protein Cocoa Rice Crisps Caramel Vanilla Flour Banana Chocolate Strawberry}
   CONDITION = %w{ New Out Excellent Poor Avalaible Reserved }
+
+private
+
+  def not_refereced_by_any_line_item
+    unless line_items.empty?
+    errors.add(:base, "Line items present")
+    throw :abort
+    end
+end
 end
