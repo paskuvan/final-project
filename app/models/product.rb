@@ -11,7 +11,7 @@ class Product < ApplicationRecord
 
   BRAND = %w{ Barr Canyon Nutthins CreamRice Chex Barilla Simpli Erewhon Dole}
   FINISH = %w{ Protein Cocoa Rice Crisps Caramel Vanilla Flour Banana Chocolate Strawberry}
-  CONDITION = %w{ New Out Excellent Poor Avalaible Reserved }
+  CONDITION = %w{ Nuevo Agotado Excelente Regular Disponible Reservado }
 
 private
 
